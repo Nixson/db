@@ -20,7 +20,7 @@ func Get() *gorm.DB {
 	return gormInstance
 }
 
-func DbInit() {
+func InitDb() {
 	env := environment.GetEnv()
 	logLevel := logger.Silent
 	if env.GetBool("db.showSql") {

@@ -11,18 +11,18 @@ import (
 
 var gormInstance *gorm.DB
 
-func DbInit() {
+func InitDb() {
 	env := environment.GetEnv()
 	switch env.GetString("db.driver") {
 	case "postgres":
-		postgres.DbInit()
+		postgres.InitDb()
 		gormInstance = postgres.Get()
 	}
 }
 
 func Get() *gorm.DB {
 	if gormInstance == nil {
-		DbInit()
+		InitDb()
 	}
 	return gormInstance
 }

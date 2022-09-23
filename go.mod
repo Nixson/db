@@ -3,7 +3,7 @@ module github.com/Nixson/db
 go 1.19
 
 require (
-	github.com/Nixson/environment v0.0.12
+	github.com/Nixson/environment v0.0.15
 	github.com/Nixson/logNx v0.0.1
 	gorm.io/driver/postgres v1.3.10
 	gorm.io/gorm v1.23.10
