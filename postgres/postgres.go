@@ -2,7 +2,7 @@ package postgres
 
 import (
 	"fmt"
-	"github.com/Nixson/db"
+	lgr "github.com/Nixson/db/logger"
 	"github.com/Nixson/environment"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -27,7 +27,7 @@ func InitDb() {
 		logLevel = logger.Info
 	}
 	newLogger := logger.New(
-		log.New(&db.LoggerWriter{LogLevel: logLevel}, "", 0), // io writer
+		log.New(&lgr.Writer{LogLevel: logLevel}, "", 0), // io writer
 		logger.Config{
 			SlowThreshold:             time.Second, // Slow SQL threshold
 			LogLevel:                  logLevel,    // Log level
@@ -51,6 +51,9 @@ func InitDb() {
 	if err != nil {
 		panic("failed to connect database")
 	}
-
+	sqlDB, _ := db.DB()
+	sqlDB.SetMaxIdleConns(env.GetInt("db.maxIdleConns"))
+	sqlDB.SetMaxOpenConns(env.GetInt("db.maxOpenConns"))
+	sqlDB.SetConnMaxLifetime(time.Second * time.Duration(env.GetInt("db.connMaxLifetime")))
 	gormInstance = db
 }

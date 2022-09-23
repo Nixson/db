@@ -3,9 +3,7 @@ package db
 import (
 	"github.com/Nixson/db/postgres"
 	"github.com/Nixson/environment"
-	"github.com/Nixson/logNx"
 	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
 	"math"
 )
 
@@ -25,24 +23,6 @@ func Get() *gorm.DB {
 		InitDb()
 	}
 	return gormInstance
-}
-
-type LoggerWriter struct {
-	LogLevel logger.LogLevel
-}
-
-func (w *LoggerWriter) Write(p []byte) (n int, err error) {
-	switch w.LogLevel {
-	case logger.Silent:
-		break
-	case logger.Error:
-		logNx.Get().Error(string(p))
-	case logger.Warn:
-		logNx.Get().Warning(string(p))
-	case logger.Info:
-		logNx.Get().Info(string(p))
-	}
-	return len(p), nil
 }
 
 type Pagination struct {
