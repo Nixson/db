@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/Nixson/environment v0.0.15
-	github.com/Nixson/logNx v0.0.1
+	github.com/Nixson/logNx v0.0.2
 	gorm.io/driver/postgres v1.3.10
 	gorm.io/gorm v1.23.10
 )

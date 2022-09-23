@@ -36,11 +36,11 @@ func (w *LoggerWriter) Write(p []byte) (n int, err error) {
 	case logger.Silent:
 		break
 	case logger.Error:
-		logNx.GetLogger().Error(string(p))
+		logNx.Get().Error(string(p))
 	case logger.Warn:
-		logNx.GetLogger().Warning(string(p))
+		logNx.Get().Warning(string(p))
 	case logger.Info:
-		logNx.GetLogger().Info(string(p))
+		logNx.Get().Info(string(p))
 	}
 	return len(p), nil
 }
