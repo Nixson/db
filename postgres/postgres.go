@@ -2,12 +2,11 @@ package postgres
 
 import (
 	"fmt"
-	lgr "github.com/Nixson/db/logger"
 	"github.com/Nixson/environment"
+	lgr "github.com/Nixson/logger"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"log"
 	"time"
 )
 
@@ -27,7 +26,7 @@ func InitDb() {
 		logLevel = logger.Info
 	}
 	newLogger := logger.New(
-		log.New(&lgr.Writer{LogLevel: logLevel}, "", 0), // io writer
+		lgr.Info,
 		logger.Config{
 			SlowThreshold:             time.Second, // Slow SQL threshold
 			LogLevel:                  logLevel,    // Log level
